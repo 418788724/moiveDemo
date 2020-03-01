@@ -6,7 +6,7 @@ const config: IConfig =  {
   routes: [
     {
       path: '/',
-      component: '../layouts/index',
+      component: '../layouts/SiderLayout',
       routes: [
         { path: '/', component: '../pages/index' }
       ]
@@ -15,8 +15,10 @@ const config: IConfig =  {
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
-      antd: true,
-      dva: true,
+      antd: false,
+      dva: {
+        immer: true
+      },
       dynamicImport: { webpackChunkName: true },
       title: 'Oo-web',
       dll: true,
