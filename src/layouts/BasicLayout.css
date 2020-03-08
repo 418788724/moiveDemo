@@ -15,4 +15,10 @@
 } */
 
 .main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #0CCDA3, #C1FCD3);
 }

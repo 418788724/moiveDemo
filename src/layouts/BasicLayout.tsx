@@ -21,9 +21,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   }
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} onClick={() => handleSiderBar(true)}>
       <h1>content</h1>
-      <Button inverted color='purple' onClick={() => handleSiderBar(true)}>打开</Button>
+      {/* <Button inverted color='purple' onClick={() => handleSiderBar(true)}>打开</Button> */}
     </div>
   );
 };

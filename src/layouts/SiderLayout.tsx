@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Sidebar, Segment, Button } from 'semantic-ui-react'
 import { Dispatch, connect } from 'dva'
 import { ConnectState } from '@/models/connect';
-import UserLayout from './UserLayout';
+import RightLayout from './RightLayout';
 import BasicLayout from './BasicLayout';
 
 export interface SiderLayoutProps {
@@ -26,7 +26,7 @@ const SiderLayout: React.FC<SiderLayoutProps> = props => {
 
 
   return (
-    <Sidebar.Pushable as={Segment}>
+    <Sidebar.Pushable>
       <Sidebar
         animation='overlay'
         icon='labeled'
@@ -36,12 +36,13 @@ const SiderLayout: React.FC<SiderLayoutProps> = props => {
         direction='right'
         visible={sidebar}
         width='very wide'>
-          <UserLayout />
+          <RightLayout />
       </Sidebar>
-      <Sidebar.Pusher>
-        <Segment basic>
-          <BasicLayout />
-        </Segment>
+      <Sidebar.Pusher style={{
+          width: '100%',
+          height: '100%',
+        }}>
+        <BasicLayout />
       </Sidebar.Pusher>
     </Sidebar.Pushable>
   );
