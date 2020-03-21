@@ -1,8 +1,22 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  layout: {
-    name: 'Oops',
-  },
-  routes: [{ path: '/', component: '@/pages/index' }],
+  title: 'Oops',
+  dva: {},
+  plugins: [],
+  routes: [
+    {
+      path: '/',
+      component: '@/layouts/DrawerLayout/index',
+      routes: [
+        {
+          path: '/',
+          component: '@/pages/index',
+        },
+      ],
+    },
+    {
+      component: '@/pages/404',
+    },
+  ],
 });
