@@ -1,12 +1,20 @@
 import React from 'react';
-import Login from '@/components/Login';
+import { connect } from 'dva';
 
-const SecurityLayout: React.FC = () => {
-  return (
-    <div>
-      <Login />
-    </div>
-  );
+import { ConnectState, ConnectProps } from '@/models/connect';
+import Login from '@/components/Login';
+import { CurrentUser } from '@/models/user';
+
+interface SecurityLayoutProps extends ConnectProps {
+  loading?: boolean;
+  currentUser?: CurrentUser;
+}
+
+const SecurityLayout: React.FC<SecurityLayoutProps> = props => {
+  return <Login />;
 };
 
-export default SecurityLayout;
+export default connect(({ user, loading }: ConnectState) => ({
+  user: user.currentUser,
+  loading: loading.models.user,
+}))(SecurityLayout);

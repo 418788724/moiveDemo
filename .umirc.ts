@@ -4,6 +4,9 @@ export default defineConfig({
   title: 'Oops',
   dva: {},
   plugins: [],
+  theme: {
+    'primary-color': '#0CCDA3',
+  },
   routes: [
     {
       path: '/',

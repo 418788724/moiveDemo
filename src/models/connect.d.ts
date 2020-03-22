@@ -1,5 +1,9 @@
+import { AnyAction } from 'redux';
+import { Dispatch } from 'dva';
+
 import { GlobalModelState } from './global';
 import { LoginStateType } from './login';
+import { UserModelState } from './user';
 
 export interface Loading {
   global: boolean;
@@ -15,4 +19,9 @@ export interface ConnectState {
   global: GlobalModelState;
   loading: Loading;
   login: LoginStateType;
+  user: UserModelState;
+}
+
+export interface ConnectProps {
+  dispatch?: Dispatch<AnyAction>;
 }

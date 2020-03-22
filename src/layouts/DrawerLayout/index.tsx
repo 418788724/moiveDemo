@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Drawer, Button } from 'antd';
 import { connect, Dispatch } from 'dva';
 
-import { ConnectState } from '@/models/connect';
+import { ConnectState, ConnectProps } from '@/models/connect';
 import BasicLayout from '../BasicLayout';
 import SecurityLayout from '../SecurityLayout';
 
 import styles from './index.less';
 
-export interface DrawerLayoutProps {
+export interface DrawerLayoutProps extends ConnectProps {
   sideBar: boolean;
   dispatch: Dispatch;
 }
@@ -28,13 +28,12 @@ const DrawerLayout: React.FC<DrawerLayoutProps> = props => {
     <div className={styles.main}>
       <BasicLayout {...props} />
       <Drawer
-        title="User"
-        width={'40%'}
+        width={'30%'}
         mask={true}
         onClose={() => handleSiderBar(false)}
         visible={sideBar}
       >
-        <SecurityLayout {...props} />
+        <SecurityLayout />
       </Drawer>
     </div>
   );
