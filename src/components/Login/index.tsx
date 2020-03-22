@@ -8,17 +8,13 @@ import {
   WechatOutlined,
   QqOutlined,
   WeiboCircleOutlined,
-  createFromIconfontCN,
 } from '@ant-design/icons';
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
-});
 
 import logo from '@/assets/logo.png';
 import styles from './index.less';
 
 const Login = () => {
-  const onFinish = values => {
+  const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
 
@@ -88,12 +84,7 @@ const Login = () => {
             </div>
           </Form.Item>
         </Form>
-        <Button
-          className={styles.to_register}
-          type="primary"
-          size="middle"
-          icon={<ArrowRightOutlined />}
-        >
+        <Button type="primary" size="middle" icon={<ArrowRightOutlined />}>
           去注册
         </Button>
       </div>
