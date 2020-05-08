@@ -1,5 +1,8 @@
-import React from 'react';
+// import React from 'react';
 
-const Layout: React.FC = ({ children }) => <>{children}</>;
+// import BasicLayout from './BasicLayout';
 
-export default Layout;
+// export default props => {
+//     const { location } = props
+//     return <BasicLayout {...props} />
+// }
