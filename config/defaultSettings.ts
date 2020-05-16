@@ -1,17 +1,63 @@
-type DefaultSettings = {
-  navTheme: string;
-  Theme: DefaultTheme;
-};
+import { MenuTheme } from 'antd/es/menu/MenuContext';
 
-type DefaultTheme = {
-  'primary-color': string; // 全局主色
-};
+export type ContentWidth = 'Fluid' | 'Fixed';
 
-const Settings: DefaultSettings = {
+export interface DefaultSettings {
+  /**
+   * theme for nav menu
+   */
+  navTheme: MenuTheme;
+  /**
+   * primary color of ant design
+   */
+  Theme: Object;
+  /**
+   * nav menu position: `sidemenu` or `topmenu`
+   */
+  layout: 'sidemenu' | 'topmenu';
+  /**
+   * layout of content: `Fluid` or `Fixed`, only works when layout is topmenu
+   */
+  contentWidth: ContentWidth;
+  /**
+   * sticky header
+   */
+  fixedHeader: boolean;
+  /**
+   * auto hide header
+   */
+  autoHideHeader: boolean;
+  /**
+   * sticky siderbar
+   */
+  fixSiderbar: boolean;
+  menu: { locale: boolean };
+  title: string;
+  pwa: boolean;
+  // Your custom iconfont Symbol script Url
+  // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js
+  // 注意：如果需要图标多色，Iconfont 图标项目里要进行批量去色处理
+  // Usage: https://github.com/ant-design/ant-design-pro/pull/3517
+  iconfontUrl: string;
+  colorWeak: boolean;
+}
+
+export default {
   navTheme: 'dark',
+  // 拂晓蓝
   Theme: {
     'primary-color': '#0CCDA3',
   },
-};
-
-export { Settings };
+  layout: 'topmenu',
+  contentWidth: 'Fixed',
+  fixedHeader: false,
+  autoHideHeader: false,
+  fixSiderbar: false,
+  colorWeak: false,
+  menu: {
+    locale: true,
+  },
+  title: 'Oops追剧网',
+  pwa: false,
+  iconfontUrl: '',
+} as DefaultSettings;

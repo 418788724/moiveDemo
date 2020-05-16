@@ -1,10 +1,18 @@
+import { Button, Result } from 'antd';
 import React from 'react';
-import styles from './index.less';
+import { history } from 'umi';
 
-export default () => {
-  return (
-    <div>
-      <h1 className={styles.title}>页面找不到了！</h1>
-    </div>
-  );
-};
+const NoFoundPage: React.FC<{}> = () => (
+  <Result
+    status="404"
+    title="404"
+    subTitle="对不起，页面不存在！"
+    extra={
+      <Button type="primary" onClick={() => history.push('/')}>
+        回到首页
+      </Button>
+    }
+  />
+);
+
+export default NoFoundPage;

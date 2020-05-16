@@ -1,41 +1,153 @@
-import React, { Children } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+/**
+ * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
+ * You can view component api by:
+ * https://github.com/ant-design/ant-design-pro-layout
+ */
+import ProLayout, {
+  MenuDataItem,
+  BasicLayoutProps as ProLayoutProps,
+} from '@ant-design/pro-layout';
+import React, { useEffect } from 'react';
+import { Link, useIntl, connect, Dispatch } from 'umi';
+import RightContent from '@/components/GlobalHeader/RightContent';
+import GlobalFooter from '@/components/GlobalFooter';
+import { ConnectState, SettingModelState } from '@/models/connect';
+import logo from '../assets/logo.png';
 
-import styles from './BasicLayout.less';
-const { Header, Content, Footer } = Layout;
+export interface BasicLayoutProps extends ProLayoutProps {
+  breadcrumbNameMap: {
+    [path: string]: MenuDataItem;
+  };
+  // route: ProLayoutProps['route'] & {
+  //   authority: string[];
+  // };
+  settings: SettingModelState;
+  dispatch: Dispatch;
+}
+export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
+  breadcrumbNameMap: {
+    [path: string]: MenuDataItem;
+  };
+};
+/**
+ * use Authorized check all menu item
+ */
 
-const BasicLayout: React.FC = props => {
-  const { children } = props;
+const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+  menuList.map((item) => {
+    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
+    return localItem as MenuDataItem;
+  });
 
+const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
+  const {
+    dispatch,
+    children,
+    settings,
+    // location = {
+    //   pathname: '/',
+    // },
+  } = props;
+  /**
+   * constructor
+   */
+
+  useEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: 'user/fetchCurrent',
+      });
+    }
+  }, []);
+  /**
+   * init variables
+   */
+
+  const handleMenuCollapse = (payload: boolean): void => {
+    if (dispatch) {
+      dispatch({
+        type: 'global/changeLayoutCollapsed',
+        payload,
+      });
+    }
+  }; // get children authority
+
+  const { formatMessage } = useIntl();
+  const defaultFooterDom = () => {
+    return (
+      <GlobalFooter
+        statement={formatMessage({ id: 'global.statement' })}
+        copyright={formatMessage({ id: 'global.copyright' })}
+        links={[
+          {
+            key: 'statement',
+            title: formatMessage({ id: 'menu.about' }),
+            href: '/statement',
+          },
+          {
+            key: 'contact',
+            title: formatMessage({ id: 'menu.contact' }),
+            href: '/msg',
+          },
+          {
+            key: 'state',
+            title: formatMessage({ id: 'menu.statement' }),
+            href: '/statement',
+          },
+          {
+            key: 'msg',
+            title: formatMessage({ id: 'menu.msg' }),
+            href: '/msg',
+          },
+        ]}
+      />
+    );
+  };
   return (
-    <Layout className="layout">
-      <Header className={styles.headerWrap}>
-        <div className={styles.logo} />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          <Menu.Item key="1">首页</Menu.Item>
-          <Menu.Item key="2">今日更新</Menu.Item>
-          <Menu.Item key="3">排行榜</Menu.Item>
-          <Menu.Item key="4">网站地图</Menu.Item>
-        </Menu>
-        <div className={styles.headerSpanWrap}>
-          <span>声明</span>
-          <span>留言</span>
-          <span>FAQ</span>
-        </div>
-      </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <div className={styles.siteLayoutContent}>{children}</div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        Copyright © 2020 Oops 保留所有权利
-      </Footer>
-    </Layout>
+    <ProLayout
+      logo={logo}
+      formatMessage={formatMessage}
+      menuHeaderRender={(logoDom, titleDom) => (
+        <Link to="/">
+          {logoDom}
+          {titleDom}
+        </Link>
+      )}
+      onCollapse={handleMenuCollapse}
+      menuItemRender={(menuItemProps, defaultDom) => {
+        if (menuItemProps.isUrl || menuItemProps.children || !menuItemProps.path) {
+          return defaultDom;
+        }
+
+        return <Link to={menuItemProps.path}>{defaultDom}</Link>;
+      }}
+      breadcrumbRender={(routers = []) => [
+        {
+          path: '/',
+          breadcrumbName: formatMessage({ id: 'menu.home' }),
+        },
+        ...routers,
+      ]}
+      itemRender={(route, params, routes, paths) => {
+        const first = routes.indexOf(route) === 0;
+        return first ? (
+          <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
+        ) : (
+          <span>{route.breadcrumbName}</span>
+        );
+      }}
+      footerRender={defaultFooterDom}
+      menuDataRender={menuDataRender}
+      rightContentRender={() => <RightContent />}
+      {...props}
+      {...settings}
+    >
+      {children}
+    </ProLayout>
   );
 };
 
-export default BasicLayout;
+export default connect(({ global, settings }: ConnectState) => ({
+  collapsed: global.collapsed,
+  settings,
+}))(BasicLayout);
