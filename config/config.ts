@@ -34,6 +34,8 @@ export default defineConfig({
         { path: '/updateNow', name: 'updateNow', component: '@/pages/updateNow' },
         { path: '/ranking', name: 'ranking', component: '@/pages/ranking' },
         { path: '/map', name: 'map', component: '@/pages/map' },
+        { path: '/detail/:id', component: '@/pages/detail' },
+        { path: '/video/:id', component: '@/pages/video' },
         { path: '/statement', component: '@/pages/statement' },
         { path: '/msg', component: '@/pages/msg' },
         { path: '/feedback', component: '@/pages/feedback' },
