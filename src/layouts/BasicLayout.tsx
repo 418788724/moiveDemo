@@ -35,6 +35,7 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
   menuList.map((item) => {
+    console.log(item);
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return localItem as MenuDataItem;
   });
@@ -73,36 +74,34 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   }; // get children authority
 
   const { formatMessage } = useIntl();
-  const defaultFooterDom = () => {
-    return (
-      <GlobalFooter
-        statement={formatMessage({ id: 'global.statement' })}
-        copyright={formatMessage({ id: 'global.copyright' })}
-        links={[
-          {
-            key: 'statement',
-            title: formatMessage({ id: 'menu.about' }),
-            href: '/statement',
-          },
-          {
-            key: 'contact',
-            title: formatMessage({ id: 'menu.contact' }),
-            href: '/msg',
-          },
-          {
-            key: 'state',
-            title: formatMessage({ id: 'menu.statement' }),
-            href: '/statement',
-          },
-          {
-            key: 'msg',
-            title: formatMessage({ id: 'menu.msg' }),
-            href: '/msg',
-          },
-        ]}
-      />
-    );
-  };
+  const defaultFooterDom = (
+    <GlobalFooter
+      statement={formatMessage({ id: 'global.statement' })}
+      copyright={formatMessage({ id: 'global.copyright' })}
+      links={[
+        {
+          key: 'statement',
+          title: formatMessage({ id: 'menu.about' }),
+          href: '/statement',
+        },
+        {
+          key: 'contact',
+          title: formatMessage({ id: 'menu.contact' }),
+          href: '/msg',
+        },
+        {
+          key: 'state',
+          title: formatMessage({ id: 'menu.statement' }),
+          href: '/statement',
+        },
+        {
+          key: 'msg',
+          title: formatMessage({ id: 'menu.msg' }),
+          href: '/msg',
+        },
+      ]}
+    />
+  );
   return (
     <ProLayout
       logo={logo}
@@ -136,7 +135,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           <span>{route.breadcrumbName}</span>
         );
       }}
-      footerRender={defaultFooterDom}
+      footerRender={() => defaultFooterDom}
       menuDataRender={menuDataRender}
       rightContentRender={() => <RightContent />}
       {...props}
