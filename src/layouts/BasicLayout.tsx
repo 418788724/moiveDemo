@@ -13,6 +13,7 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import GlobalFooter from '@/components/GlobalFooter';
 import { ConnectState, SettingModelState } from '@/models/connect';
 import logo from '../assets/logo.png';
+import MainLayout from './MainLayout';
 
 export interface BasicLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: {
@@ -35,7 +36,6 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
   menuList.map((item) => {
-    console.log(item);
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return localItem as MenuDataItem;
   });
@@ -141,7 +141,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       {...props}
       {...settings}
     >
-      {children}
+      <MainLayout>{children}</MainLayout>
     </ProLayout>
   );
 };
