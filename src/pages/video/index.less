@@ -1,0 +1,47 @@
+@import '~video-react/dist/video-react.css';
+
+.tab-wrap {
+  padding: 10px;
+}
+
+.video-name-wrap {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 5px;
+  h1 {
+    padding: 0 10px;
+    span {
+      color: @primary-color;
+    }
+  }
+}
+
+.video-tip-wrap {
+  padding: 10px 5px;
+  p {
+    span {
+      text-decoration: underline;
+      cursor: pointer;
+      &:hover {
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+.number-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  .number-btn {
+    margin: 5px;
+    font-weight: bolder;
+    white-space: nowrap;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      color: #f0f0f0;
+      background: @primary-color;
+    }
+  }
+}

@@ -70,7 +70,8 @@
     "react-router-dom": "^5.1.2",
     "umi": "^3.1.2",
     "umi-request": "^1.0.8",
-    "use-merge-value": "^1.0.1"
+    "use-merge-value": "^1.0.1",
+    "video-react": "^0.14.1"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^1.0.18",
