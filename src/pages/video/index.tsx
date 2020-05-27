@@ -55,7 +55,7 @@ export default () => {
   };
   return (
     <div>
-      <Player controls data-setup="{}" poster={poster}>
+      <Player c controls data-setup="{}" poster={poster}>
         <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
         <BigPlayButton position="center" />
         <ControlBar autoHide={false}>
