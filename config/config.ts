@@ -72,6 +72,7 @@ export default defineConfig({
         },
         { path: '/detail/:id', component: '@/pages/detail/index' },
         { path: '/video/:id', component: '@/pages/video/index' },
+        { path: '/search', component: '@/pages/search/index' },
         { path: '/statement', component: '@/pages/statement/index' },
         { path: '/msg', component: '@/pages/msg' },
         { path: '/feedback', component: '@/pages/feedback/index' },

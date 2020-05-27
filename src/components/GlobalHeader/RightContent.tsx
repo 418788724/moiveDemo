@@ -59,23 +59,23 @@ const GlobalHeaderRight: React.FC<GlobalHeaderRightProps> = (props) => {
         className={`${styles.action} ${styles.search}`}
         placeholder={formatMessage({ id: 'component.globalHeader.search' })}
         options={[
-          { label: <a href="https://umijs.org/zh/guide/umi-ui.html">西部世界</a>, value: 'umi ui' },
+          { label: <a href="/search?name=西部世界">西部世界</a>, value: '西部世界' },
           {
-            label: <a href="next.ant.design">绝命毒师</a>,
-            value: 'Ant Design',
+            label: <a href="/search?name=绝命毒师">绝命毒师</a>,
+            value: '绝命毒师',
           },
           {
-            label: <a href="https://protable.ant.design/">极速追击</a>,
-            value: 'Pro Table',
+            label: <a href="/search?name=极速追击">极速追击</a>,
+            value: '极速追击',
           },
           {
-            label: <a href="https://prolayout.ant.design/">权力的游戏</a>,
-            value: 'Pro Layout',
+            label: <a href="/search?name=权力的游戏">权力的游戏</a>,
+            value: '权力的游戏',
           },
         ]}
-        // onSearch={value => {
-        //   //console.log('input', value);
-        // }}
+        onSearch={(value) => {
+          console.log('input', value);
+        }}
       />
       <RightHelpRender />
       {/* {REACT_APP_ENV && (
