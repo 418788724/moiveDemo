@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'umi';
 import { Form, Input, Button, Pagination, Card } from 'antd';
 import MyComment from '../MyComment';
+import styles from './index.less';
 
 const layout = {
   labelCol: { span: 4 },
@@ -63,12 +64,14 @@ export default () => {
       </p>
       <Card title="相关评论">
         <MyComment />
-        <Pagination
-          showSizeChanger
-          onShowSizeChange={onShowSizeChange}
-          defaultCurrent={3}
-          total={500}
-        />
+        <div className={styles.paginationCenter}>
+          <Pagination
+            showSizeChanger
+            onShowSizeChange={onShowSizeChange}
+            defaultCurrent={3}
+            total={500}
+          />
+        </div>
       </Card>
     </div>
   );

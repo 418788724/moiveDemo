@@ -1,9 +1,9 @@
 import React from 'react';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, BackTop } from 'antd';
+import { ArrowUpOutlined } from '@ant-design/icons';
 import ContentWrap from '@/components/ContentWrap';
 import TopBar from '@/components/TopBar';
 import './MainLayout.less';
-// const { Meta } = Card;
 
 const MainLayout: React.FC = (props) => {
   const { children } = props;
@@ -26,6 +26,9 @@ const MainLayout: React.FC = (props) => {
             </Card>
           </div>
         </Col>
+        <BackTop>
+          <ArrowUpOutlined className="to-top" />
+        </BackTop>
       </Row>
     </ContentWrap>
   );
